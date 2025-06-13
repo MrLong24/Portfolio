@@ -284,13 +284,15 @@
         }
 
         .project-img {
-            height: 200px;
-            background: linear-gradient(135deg, #646cba, #7c8ec7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
+        height: 200px;
+        overflow: hidden; 
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Đảm bảo hình ảnh lấp đầy khung mà không bị méo */
+            display: block; /* Loại bỏ khoảng trắng dưới ảnh nếu có */
         }
 
         .project-content {
@@ -302,6 +304,26 @@
             margin-bottom: 1rem;
         }
 
+        /* Trong phần Project */
+        .project-content .project-links {
+            margin-top: 1rem;
+            text-align: left; /* Căn phải hoặc tùy chỉnh theo ý bạn */
+        }
+
+        .project-content .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #646cba;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .project-content .github-link:hover {
+            color: #7c8ec7;
+            transform: translateY(-2px);
+        }
         /* Liên hệ */
         .contact-container {
             display: grid;
