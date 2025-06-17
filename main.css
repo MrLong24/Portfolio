@@ -98,18 +98,75 @@
             text-align: center;
             padding: 120px 2rem 80px;
             margin-top: 60px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .banner h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
+        .banner h1,
+        .banner p,
+        .banner .btn-primary {
+            position: relative;
+            z-index: 2; /* Cao hơn các hiệu ứng */
+            animation: fadeInUp 1s ease forwards, floatAnimation 6s ease-in-out infinite; ;
         }
 
-        .banner p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.2s both;
+        .banner p { animation-delay: 0.2s, 0; }
+        .banner .btn-primary { animation-delay: 0.4s, 0; }
+
+        @keyframes floatAnimation {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px); /* Nổi lên 10px */
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Styles cho các "giọt bóng" hoặc "chấm sáng" */
+        .bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.15); /* Giữ màu trắng trong suốt */
+            border-radius: 50%; /* Hình tròn */
+            filter: blur(3px); /* Giữ nguyên độ mờ nhòe */
+            animation: bubbleMovement linear infinite; /* Animation sẽ được gán duration và delay bằng JS */
+            z-index: 1; /* Nằm dưới nội dung chính của banner */
+            opacity: 0; /* Đảm bảo bong bóng ẩn hoàn toàn lúc ban đầu */
+        }
+
+        /* Keyframes cho hiệu ứng di chuyển ngẫu nhiên */
+        @keyframes bubbleMovement {
+            0% {
+                transform: translate(var(--startX, 0), var(--startY, 0)) scale(var(--startScale, 0.8)) rotate(0deg);
+                opacity: 0; /* Đảm bảo opacity là 0 ở điểm bắt đầu */
+            }
+            15% {
+                opacity: var(--maxOpacity, 0.3); /* Bong bóng hiện rõ dần */
+            }
+            50% {
+                transform: translate(var(--midX, 0), var(--midY, 0)) scale(var(--midScale, 1.0)) rotate(var(--midRotate, 90deg));
+                opacity: var(--maxOpacity, 0.3);
+            }
+            85% {
+                opacity: var(--maxOpacity, 0.3);
+            }
+            100% {
+                transform: translate(var(--endX, 0), var(--endY, 0)) scale(var(--endScale, 0.9)) rotate(var(--endRotate, 180deg));
+                opacity: 0; /* Bong bóng mờ dần và biến mất ở điểm kết thúc */
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .btn-primary {
