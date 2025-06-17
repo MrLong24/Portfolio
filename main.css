@@ -19,7 +19,7 @@
 
         /* Header và Navigation */
         header {
-            background: linear-gradient(135deg, #646cba 0%, #7c8ec7 100%);
+            background: linear-gradient(135deg, #646cba 0%, #7c8ec7 100%); /* Giữ nguyên gradient */
             color: white;
             padding: 1rem 0;
             position: fixed;
@@ -39,27 +39,63 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem; /* Tăng kích thước logo một chút để nổi bật hơn */
             font-weight: bold;
-            color: white;
+            color: white; /* Logo màu trắng */
+            text-decoration: none;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
             gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li {
+            margin: 0; /* Đảm bảo không có margin mặc định từ li */
         }
 
         .nav-links a {
-            color: white;
+            color: white; /* Màu chữ mặc định là trắng */
             text-decoration: none;
-            transition: color 0.3s ease;
+            font-size: 1.1rem;
             font-weight: 500;
+            padding-bottom: 0.5rem; /* Tạo khoảng trống cho đường kẻ gạch dưới */
+            position: relative; /* Quan trọng: để ::after định vị tương đối với link */
+            transition: color 0.3s ease; /* Chuyển động màu chữ khi hover */
+        }
+
+        .nav-links a::after {
+            content: ''; 
+            position: absolute;
+            bottom: 0; /* Đặt đường kẻ ở dưới cùng của link */
+            left: 50%; /* Bắt đầu từ giữa */
+            transform: translateX(-50%); /* Dịch chuyển về giữa */
+            width: 0; /* Chiều rộng ban đầu là 0 (ẩn) */
+            height: 3px; /* Chiều cao của đường kẻ */
+            background-color: #b8c5f2; 
+            transition: width 0.3s ease-out; /* Chuyển động mượt mà cho chiều rộng */
         }
 
         .nav-links a:hover {
-            color: #b8c5f2;
+            color: #b8c5f2; 
             transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 70%; /* Chiều rộng đường kẻ khi hover (70% chiều rộng của link) */
+        }
+
+        .nav-links a.active {
+            color: #b8c5f2; /* Màu cho link đang active */
+
+        }
+
+        .nav-links a.active::after {
+            width: 70%; /* Đảm bảo đường kẻ hiện ra nếu link active */
+            background-color: #b8c5f2; /* Màu của đường kẻ cho link active */
         }
 
         /* Mobile Menu Toggle */
@@ -458,64 +494,149 @@
             transition: width 2s ease;
         }
 
-        /* Dự án */
+        /* Projects Section */
+        #projects {
+            padding: 80px 2rem;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+
+        #projects .section-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 3rem;
+        }
+
+        #projects .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* 2-3 cột linh hoạt */
+            gap: 2.5rem; /* Khoảng cách giữa các card */
+            justify-content: center;
+            align-items: stretch; /* Đảm bảo các card có chiều cao bằng nhau nếu cần */
         }
 
         .project-card {
-            background: white;
+            background-color: white;
             border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Quan trọng để nội dung ẩn/hiện không tràn ra */
+            position: relative; /* Quan trọng cho việc định vị project-content */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer; /* Thay đổi con trỏ chuột khi hover */
+            display: flex; /* Dùng flexbox để xếp ảnh và content */
+            flex-direction: column; /* Xếp ảnh trên, content dưới */
+            height: 400px; /* Chiều cao cố định cho card để hiệu ứng hoạt động tốt */
+            /* Có thể điều chỉnh height này tùy theo ý muốn của bạn */
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px); /* Nổi lên khi hover */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
         }
 
         .project-img {
-        height: 200px;
-        overflow: hidden; 
+            width: 100%;
+            height: 100%; /* Ban đầu chiếm toàn bộ chiều cao */
+            overflow: hidden;
+            position: absolute; /* Quan trọng: để ảnh nằm trên lớp */
+            top: 0;
+            left: 0;
+            transition: transform 0.4s ease-out; /* Hiệu ứng di chuyển ảnh */
         }
 
         .project-img img {
             width: 100%;
             height: 100%;
-            object-fit: cover; 
-            display: block; 
+            object-fit: cover; /* Đảm bảo ảnh vừa khung mà không bị méo */
+            display: block;
+            transition: transform 0.4s ease-out; /* Hiệu ứng zoom ảnh */
         }
 
         .project-content {
+            position: absolute; /* Quan trọng: để content nằm trên lớp */
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto; /* Chiều cao tự động để vừa nội dung */
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0) 100%); /* Gradient đen mờ từ dưới lên */
+            color: white;
             padding: 1.5rem;
+            text-align: left;
+            transform: translateY(100%); /* Mặc định ẩn hoàn toàn xuống dưới */
+            opacity: 0; /* Mặc định trong suốt */
+            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Căn nội dung xuống cuối */
+        }
+
+        .project-card:hover .project-img {
+            transform: translateY(-30%); /* Ảnh trượt lên trên một phần */
+            /* img bên trong có thể zoom nhẹ nếu muốn */
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.05); /* Zoom ảnh nhẹ khi hover */
+        }
+
+
+        .project-card:hover .project-content {
+            transform: translateY(0); /* Hiện ra hoàn toàn */
+            opacity: 1; /* Hiển thị rõ ràng */
         }
 
         .project-content h3 {
-            color: #646cba;
-            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            color: white;
         }
 
-        .project-content .project-links {
+        .project-content p {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .project-content p strong {
+            color: #b8c5f2; /* Màu nổi bật cho công nghệ */
+        }
+
+        .project-links {
             margin-top: 1rem;
-            text-align: left; 
+            text-align: right; /* Căn phải link */
         }
 
-        .project-content .github-link {
+        .github-link {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            color: #646cba;
+            color: #b8c5f2; /* Màu link GitHub */
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s ease, transform 0.3s ease;
+            font-size: 1rem;
+            transition: color 0.3s ease;
         }
 
-        .project-content .github-link:hover {
-            color: #7c8ec7;
-            transform: translateY(-2px);
+        .github-link:hover {
+            color: #fff; /* Màu trắng khi hover */
+            text-decoration: underline;
+        }
+
+        .github-link i {
+            margin-right: 0.5rem;
+        }
+
+        /* Thêm icon GitHub vào link */
+        .github-link::before {
+            font-family: "Font Awesome 5 Free"; /* Hoặc "Font Awesome 5 Brands" nếu dùng brands */
+            font-weight: 900; /* Font Awesome Solid icons */
+            content: "\f09b"; /* Mã Unicode của icon GitHub (Font Awesome 5) */
+            margin-right: 0.5rem;
         }
         /* Liên hệ */
         .contact-info {
@@ -730,5 +851,28 @@
             }
             .hobby-item:hover .hobby-card {
                 transform: translateY(0);
+            }
+
+            #projects .section-title {
+                font-size: 2rem;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr; /* 1 cột trên mobile */
+                gap: 2rem;
+            }
+            .project-card {
+                height: 350px; /* Chiều cao card trên mobile */
+            }
+            .project-content {
+                padding: 1rem;
+            }
+            .project-content h3 {
+                font-size: 1.4rem;
+            }
+            .project-content p {
+                font-size: 0.9rem;
+            }
+            .github-link {
+                font-size: 0.9rem;
             }
         }
