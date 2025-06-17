@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV Portfolio - Nguyễn Phi Long</title>
     <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <!-- Header/Navigation -->
@@ -31,8 +32,8 @@
     <section id="home" class="banner">
         <div class="banner-content-wrapper">
         <div class="banner-text-left">
-            <h1>Xin chào ! Tôi là Nguyễn Phi Long</h1>
-            <p>Sinh viên đại học</p>
+            <h1>Nguyễn Phi Long</h1>
+            <p>Full Stack Developer</p>
             <button class="btn-primary" onclick="document.getElementById('about').scrollIntoView()">
                 Khám phá thêm
             </button>
@@ -140,7 +141,7 @@
                     <div class="skill-item">
                         <div class="skill-name">
                             <span>Khả năng tự học</span>
-                            <span>(Rất cao)</span>
+                            <span>(Cao)</span>
                         </div>
                         <div class="skill-bar">
                             <div class="skill-progress" style="width: 90%"></div>
@@ -157,8 +158,17 @@
                     </div>
                     <div class="skill-item">
                         <div class="skill-name">
-                            <span>Hướng tới Frontend Development</span>
-                            <span>(Đang học HTML/CSS/JS)</span>
+                            <span>Frontend Development</span>
+                            <span>(HTML/CSS/JS)</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 40%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Backend Development</span>
+                            <span>(JAVA/PHP/C#)</span>
                         </div>
                         <div class="skill-bar">
                             <div class="skill-progress" style="width: 40%"></div>
@@ -241,53 +251,44 @@
             <div class="contact-container">
                 <div class="contact-info">
                     <h3 style="color: #646cba; margin-bottom: 2rem;">Thông tin liên hệ</h3>
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <div>
-                            <strong>Email:</strong><br>
-                            philong240925@gmail.com
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📱</div>
-                        <div>
-                            <strong>Điện thoại:</strong><br>
-                            +84 977395580
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div>
-                            <strong>Địa chỉ:</strong><br>
-                            233/5, ấp 26, xã Thới tam thôn, huyện Hóc Môn, TP. Hồ Chí Minh
-                        </div>
-                    </div>
                     
                     <div class="contact-item">
-                        <div class="contact-icon"> &#x2623; </div>
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                         <div>
-                            <strong>GitHub:</strong><br>
-                            <a href="https://github.com/MrLong24" target="_blank" style="color: #646cba; text-decoration: none;">Github.com/MrLong24</a>
+                            <strong>Email:</strong><br>
+                            <a href="mailto:philong240925@gmail.com" class="contact-link">philong240925@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <strong>Điện thoại:</strong><br>
+                            <a href="tel:+84977395580" class="contact-link">+84 977395580</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <strong>Địa chỉ:</strong><br>
+                            <a href="https://maps.google.com/?q=233/5+%E1%BA%A5p+26%2C+x%C3%A3+Th%E1%BB%9Bi+tam+th%C3%B4n%2C+huy%E1%BB%87n+H%C3%B3c+M%C3%B4n%2C+TP.+H%E1%BB%93+Ch%C3%AD+Minh" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            class="contact-link">
+                                233/5, ấp 26, xã Thới tam thôn, huyện Hóc Môn, TP. Hồ Chí Minh
+                            </a>
                         </div>
                     </div>
 
                     <div class="social-links">
-                        <a href="#" class="social-link" title="GitHub">🐙</a>
-                        <a href="#" class="social-link" title="LinkedIn">💼</a>
-                        <a href="#" class="social-link" title="Facebook">📘</a>
-                        <a href="#" class="social-link" title="Instagram">📷</a>
+                        <a href="https://github.com/MrLong24" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.facebook.com/share/16i3W8DD7F/" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
                     </div>
-                </div>
-                <div class="contact-info">
-                    <h3 style="color: #646cba; margin-bottom: 2rem;">Gửi tin nhắn</h3>
-                    <form style="display: flex; flex-direction: column; gap: 1rem;">
-                        <input type="text" placeholder="Họ và tên" style="padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
-                        <input type="email" placeholder="Email" style="padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
-                        <textarea placeholder="Nội dung tin nhắn" rows="5" style="padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; resize: vertical;"></textarea>
-                        <button type="submit" style="background: #646cba; color: white; padding: 12px; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer; transition: background 0.3s ease;">
-                            Gửi tin nhắn
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>

@@ -95,7 +95,6 @@
         .banner {
             background: linear-gradient(135deg, #646cba 0%, #7c8ec7 100%);
             color: white;
-            /* text-align: center; (Bỏ cái này đi vì nội dung giờ không còn căn giữa toàn bộ) */
             padding: 100px 2rem; /* Điều chỉnh padding để phù hợp với layout 2 cột */
             margin-top: 60px;
             position: relative;
@@ -125,7 +124,6 @@
             min-width: 300px; /* Chiều rộng tối thiểu để không bị quá hẹp */
             text-align: left; /* Căn trái text */
             padding-right: 2rem; /* Khoảng cách với cột phải */
-            /* Áp dụng animation floatAnimation cho toàn bộ cột text */
             animation: floatAnimation 6s ease-in-out infinite;
         }
 
@@ -520,12 +518,6 @@
             transform: translateY(-2px);
         }
         /* Liên hệ */
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-
         .contact-info {
             background: white;
             padding: 2rem;
@@ -552,6 +544,16 @@
             justify-content: center;
             color: white;
             margin-right: 1rem;
+        }
+
+        .contact-item a.contact-link {
+            color: #333; /* Đặt màu chữ giống với text thông thường */
+            text-decoration: none; /* Bỏ gạch chân */
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a.contact-link:hover {
+            color: #646cba; /* Vẫn đổi màu khi hover để tạo tương tác */
         }
 
         .social-links {

@@ -37,71 +37,69 @@
             });
 
             const banner = document.querySelector('.banner');
-            const numberOfBubbles = 100; // Giữ nguyên số lượng cao để dễ thấy sự phân bố đều
+            const numberOfBubbles = 100; // Số lượng bóng khí
 
             // Lấy kích thước của banner (toàn bộ section)
-    const bannerWidth = banner.offsetWidth;
-    const bannerHeight = banner.offsetHeight;
+            const bannerWidth = banner.offsetWidth;
+            const bannerHeight = banner.offsetHeight;
 
-    for (let i = 0; i < numberOfBubbles; i++) {
-        const bubble = document.createElement('div');
-        bubble.classList.add('bubble');
+            for (let i = 0; i < numberOfBubbles; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
 
-        const size = Math.random() * 55 + 15;
-        bubble.style.width = `${size}px`;
-        bubble.style.height = `${size}px`;
+                const size = Math.random() * 55 + 15;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
 
-        const duration = Math.random() * 15 + 10; // Tăng thời gian và phạm vi duration (10s-25s)
-        const delay = Math.random() * 20; // Tăng phạm vi delay (0s-20s) để bóng xuất hiện liên tục và đa dạng
+                const duration = Math.random() * 15 + 10; // Tăng thời gian và phạm vi duration (10s-25s)
+                const delay = Math.random() * 20; // Tăng phạm vi delay (0s-20s) để bóng xuất hiện liên tục và đa dạng
 
-        const maxOpacity = Math.random() * 0.4 + 0.3;
-        const startScale = Math.random() * 0.4 + 0.6;
-        const midScale = Math.random() * 0.4 + 0.8;
-        const endScale = Math.random() * 0.4 + 0.7;
-        const midRotate = Math.random() * 360 - 180;
-        const endRotate = Math.random() * 360 - 180;
+                const maxOpacity = Math.random() * 0.4 + 0.3;
+                const startScale = Math.random() * 0.4 + 0.6;
+                const midScale = Math.random() * 0.4 + 0.8;
+                const endScale = Math.random() * 0.4 + 0.7;
+                const midRotate = Math.random() * 360 - 180;
+                const endRotate = Math.random() * 360 - 180;
 
-        // --- ĐIỀU CHỈNH CHÍNH Ở ĐÂY ---
+                // Vị trí bắt đầu (có thể từ rất xa hai bên hoặc trên/dưới)
+                // Chúng ta sẽ cho chúng xuất phát từ một phạm vi rộng hơn cả chiều ngang màn hình
+                // Ví dụ: từ -200% chiều rộng đến 200% chiều rộng
+                // và từ -100% chiều cao đến 150% chiều cao
+                const rangeX = bannerWidth * 3; // Phạm vi di chuyển ngang gấp 3 lần chiều rộng banner
+                const rangeY = bannerHeight * 2.5; // Phạm vi di chuyển dọc gấp 2.5 lần chiều cao banner
 
-        // Vị trí bắt đầu (có thể từ rất xa hai bên hoặc trên/dưới)
-        // Chúng ta sẽ cho chúng xuất phát từ một phạm vi rộng hơn cả chiều ngang màn hình
-        // Ví dụ: từ -200% chiều rộng đến 200% chiều rộng
-        // và từ -100% chiều cao đến 150% chiều cao
-        const rangeX = bannerWidth * 3; // Phạm vi di chuyển ngang gấp 3 lần chiều rộng banner
-        const rangeY = bannerHeight * 2.5; // Phạm vi di chuyển dọc gấp 2.5 lần chiều cao banner
+                const startX = Math.random() * rangeX - (rangeX / 2); // Từ -1.5x đến +1.5x width
+                const startY = Math.random() * rangeY - (rangeY / 2); // Từ -1.25x đến +1.25x height
 
-        const startX = Math.random() * rangeX - (rangeX / 2); // Từ -1.5x đến +1.5x width
-        const startY = Math.random() * rangeY - (rangeY / 2); // Từ -1.25x đến +1.25x height
+                // Vị trí giữa (phải đủ rộng để bóng đi qua cả hai bên)
+                const midX = Math.random() * rangeX - (rangeX / 2);
+                const midY = Math.random() * rangeY - (rangeY / 2);
 
-        // Vị trí giữa (phải đủ rộng để bóng đi qua cả hai bên)
-        const midX = Math.random() * rangeX - (rangeX / 2);
-        const midY = Math.random() * rangeY - (rangeY / 2);
-
-        // Vị trí kết thúc (cũng rất xa hai bên hoặc trên/dưới)
-        const endX = Math.random() * rangeX - (rangeX / 2);
-        const endY = Math.random() * rangeY - (rangeY / 2);
+                // Vị trí kết thúc (cũng rất xa hai bên hoặc trên/dưới)
+                const endX = Math.random() * rangeX - (rangeX / 2);
+                const endY = Math.random() * rangeY - (rangeY / 2);
 
 
-        // --- Kết thúc phần chỉnh sửa chính ---
+                // --- Kết thúc phần chỉnh sửa chính ---
 
-        bubble.style.setProperty('--startX', `${startX}px`);
-        bubble.style.setProperty('--startY', `${startY}px`);
-        bubble.style.setProperty('--midX', `${midX}px`);
-        bubble.style.setProperty('--midY', `${midY}px`);
-        bubble.style.setProperty('--endX', `${endX}px`);
-        bubble.style.setProperty('--endY', `${endY}px`);
-        bubble.style.setProperty('--maxOpacity', `${maxOpacity}`);
-        bubble.style.setProperty('--startScale', `${startScale}`);
-        bubble.style.setProperty('--midScale', `${midScale}`);
-        bubble.style.setProperty('--endScale', `${endScale}`);
-        bubble.style.setProperty('--midRotate', `${midRotate}deg`);
-        bubble.style.setProperty('--endRotate', `${endRotate}deg`);
+                bubble.style.setProperty('--startX', `${startX}px`);
+                bubble.style.setProperty('--startY', `${startY}px`);
+                bubble.style.setProperty('--midX', `${midX}px`);
+                bubble.style.setProperty('--midY', `${midY}px`);
+                bubble.style.setProperty('--endX', `${endX}px`);
+                bubble.style.setProperty('--endY', `${endY}px`);
+                bubble.style.setProperty('--maxOpacity', `${maxOpacity}`);
+                bubble.style.setProperty('--startScale', `${startScale}`);
+                bubble.style.setProperty('--midScale', `${midScale}`);
+                bubble.style.setProperty('--endScale', `${endScale}`);
+                bubble.style.setProperty('--midRotate', `${midRotate}deg`);
+                bubble.style.setProperty('--endRotate', `${endRotate}deg`);
 
-        bubble.style.animationDuration = `${duration}s`;
-        bubble.style.animationDelay = `${delay}s`;
+                bubble.style.animationDuration = `${duration}s`;
+                bubble.style.animationDelay = `${delay}s`;
 
-        banner.appendChild(bubble);
-    }
+                banner.appendChild(bubble);
+            }
         });
 
         // Animation khi scroll đến các section
