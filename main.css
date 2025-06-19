@@ -159,24 +159,28 @@
             flex: 1; /* Chiếm không gian linh hoạt */
             min-width: 300px; /* Chiều rộng tối thiểu để không bị quá hẹp */
             text-align: left; /* Căn trái text */
+            font-style: italic;
             padding-right: 2rem; /* Khoảng cách với cột phải */
             animation: floatAnimation 6s ease-in-out infinite;
         }
 
         .banner-text-left h1 {
-            font-size: 3.5rem; /* Điều chỉnh kích thước font */
+            font-size: 2rem; /* Điều chỉnh kích thước font */
             margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
             animation: fadeInUp 1s ease forwards;
         }
 
         .banner-text-left p {
-            font-size: 1.5rem; /* Điều chỉnh kích thước font */
+            font-size: 3.5rem; /* Điều chỉnh kích thước font */
             margin-bottom: 1.5rem;
             animation: fadeInUp 1s ease forwards 0.2s;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
         }
 
         .banner-text-left .btn-primary {
             animation: fadeInUp 1s ease forwards 0.4s;
+            text-decoration: none;
         }
 
         /* Cột phải: Hình ảnh cá nhân */
@@ -189,9 +193,23 @@
             padding-left: 2rem; /* Khoảng cách với cột trái */
         }
 
+        /* Hiệu ứng con trỏ nhấp nháy cho typewriter */
+        .typewriter-text::after {
+            content: '|'; /* Con trỏ là dấu gạch đứng */
+            display: inline-block;
+            animation: blink-caret .75s step-end infinite; /* Animation nhấp nháy */
+            font-weight: normal; /* Đảm bảo con trỏ không bị in đậm nếu text in đậm */
+            margin-left: 3px; /* Khoảng cách nhỏ từ text */
+        }
+
+        /* Ẩn con trỏ khi không gõ nữa */
+        .typewriter-text.typed::after {
+            display: none;
+        }
+
         .profile-image-container {
-            width: 400px; /* Kích thước container ảnh */
-            height: 400px;
+            width: 500px; /* Kích thước container ảnh */
+            height: 500px;
             border-radius: 50%; /* Làm tròn ảnh nếu muốn */
             overflow: hidden; /* Cắt ảnh nếu tràn ra khỏi hình tròn */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ */
@@ -208,6 +226,12 @@
             height: 100%;
             object-fit: cover; /* Đảm bảo ảnh vừa vặn và không bị méo */
             display: block;
+        }
+
+        /* Keyframes cho hiệu ứng nhấp nháy */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: white; } /* Màu trắng cho con trỏ */
         }
 
         @keyframes floatAnimation {
@@ -302,6 +326,7 @@
             font-size: 2.5rem;
             margin-bottom: 3rem;
             position: relative;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
         }
 
         .section-title::after {
@@ -325,14 +350,14 @@
         }
 
         .profile-img {
-            width: 250px;
-            height: 250px;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
             margin: 0 auto;
             box-shadow: 0 10px 30px rgba(100, 108, 186, 0.3);
-            animation: float 3s ease-in-out infinite;
             overflow: hidden;
             border: 4px solid #646cba;
+            transition: transform 0.4s ease, box-shadow 0.4s ease; /* Thêm transition */
         }
 
         .profile-img img {
@@ -340,6 +365,11 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05); /* Phóng to 5% */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25); /* Đổ bóng sâu hơn */
         }
 
         .about-text h3 {
@@ -470,6 +500,7 @@
 
         .skill-item {
             margin-bottom: 1.5rem;
+            position: relative; /* Để có thể định vị skill-percentage-display */
         }
 
         .skill-name {
@@ -489,11 +520,25 @@
 
         .skill-progress {
             height: 100%;
-            background: linear-gradient(90deg, #646cba, #7c8ec7);
-            border-radius: 4px;
-            transition: width 2s ease;
+            background: linear-gradient(90deg, #646cba 0%, #20B2AA 100%);
+            border-radius: 5px;
+            width: 0; /* Ban đầu chiều rộng là 0% */
+            transition: width 1.5s ease-out;
         }
 
+        .skill-percentage-display {
+            position: absolute;
+            top: calc(100% - 30px); /* Vị trí trên thanh level */
+            left: 0; /* Bắt đầu từ vị trí 0 (sát lề trái của skill-item) */
+            color: #555;
+            font-size: 0.9em;
+            font-weight: bold;
+            opacity: 0; /* Ẩn đi ban đầu */
+            white-space: nowrap; /* Ngăn không cho chữ xuống dòng */
+            transform: translateX(0); /* Đảm bảo không có dịch chuyển ngang ban đầu */
+            transition: transform 1.5s ease-out, opacity 0.5s ease 1s; /* Hiệu ứng di chuyển (transform) và hiện ra (opacity) */
+            z-index: 2; /* Đảm bảo nó nằm trên thanh skill-bar */
+        }
         /* Projects Section */
         #projects {
             padding: 80px 2rem;
@@ -503,7 +548,6 @@
 
         #projects .section-title {
             font-size: 2.5rem;
-            color: #333;
             margin-bottom: 3rem;
         }
 
@@ -645,7 +689,7 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
+        
         .contact-item {
             display: flex;
             align-items: center;
@@ -695,7 +739,6 @@
             text-decoration: none;
             transition: all 0.3s ease;
         }
-
         .social-link:hover {
             background: #7c8ec7;
             transform: translateY(-3px);
