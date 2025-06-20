@@ -15,6 +15,7 @@
         /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 78.0703px; 
         }
 
         /* Header và Navigation */
@@ -294,7 +295,7 @@
 
         .cta .cta-hover-content {
             width: 20px;
-            margin-left: 30px;
+            margin-left: 20px;
             position: relative;
             top: 12%;
         }
@@ -1016,15 +1017,15 @@
                 font-size: 2.5rem;
             }
             .cta {
-                font-size: 24px; /* Kích thước chữ nhỏ hơn */
-                padding: 6px 20px; /* Khoảng đệm nhỏ hơn */
-                box-shadow: 4px 4px 0 #20B2AA; /* Bóng đổ nhỏ hơn */
+                font-size: 24px; 
+                padding: 6px 20px; 
+                box-shadow: 4px 4px 0 #20B2AA; 
             }
             .cta:hover {
                 box-shadow: 6px 6px 0 #FBC638;
             }
             .cta .cta-hover-content svg {
-                width: 40px; /* Kích thước SVG nhỏ hơn */
+                width: 40px; 
                 height: 26px;
             }
             .about-content,
