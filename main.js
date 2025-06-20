@@ -63,8 +63,6 @@
 
                 // Vị trí bắt đầu (có thể từ rất xa hai bên hoặc trên/dưới)
                 // Chúng ta sẽ cho chúng xuất phát từ một phạm vi rộng hơn cả chiều ngang màn hình
-                // Ví dụ: từ -200% chiều rộng đến 200% chiều rộng
-                // và từ -100% chiều cao đến 150% chiều cao
                 const rangeX = bannerWidth * 3; // Phạm vi di chuyển ngang gấp 3 lần chiều rộng banner
                 const rangeY = bannerHeight * 2.5; // Phạm vi di chuyển dọc gấp 2.5 lần chiều cao banner
 
@@ -133,52 +131,51 @@
             }
 
             const skillsSection = document.getElementById('skills');
-    const skillBars = document.querySelectorAll('.skill-progress');
-    let skillsAnimated = false;
+            const skillBars = document.querySelectorAll('.skill-progress');
+            let skillsAnimated = false;
 
-    const skillObserverOptions = {
-        threshold: 0.5
-    };
+            const skillObserverOptions = {
+                threshold: 0.5
+            };
 
-    const skillObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !skillsAnimated) {
-                skillBars.forEach(bar => {
-                    const progress = bar.getAttribute('data-progress'); // Ví dụ: "90%"
-                    bar.style.width = progress; // Gán width để kích hoạt transition của thanh level
+            const skillObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !skillsAnimated) {
+                        skillBars.forEach(bar => {
+                            const progress = bar.getAttribute('data-progress'); // Ví dụ: "90%"
+                            bar.style.width = progress; // Gán width để kích hoạt transition của thanh level
 
-                    // Lấy thẻ hiển thị phần trăm tương ứng
-                    const skillItem = bar.closest('.skill-item');
-                    const percentageDisplay = skillItem.querySelector('.skill-percentage-display');
+                            // Lấy thẻ hiển thị phần trăm tương ứng
+                            const skillItem = bar.closest('.skill-item');
+                            const percentageDisplay = skillItem.querySelector('.skill-percentage-display');
 
-                    if (percentageDisplay) {
-                        percentageDisplay.textContent = progress; // Hiển thị số phần trăm
+                            if (percentageDisplay) {
+                                percentageDisplay.textContent = progress; // Hiển thị số phần trăm
 
-                        // Tính toán chiều rộng của thanh skill-bar container (cha của bar)
-                        const skillBarContainerWidth = bar.parentElement.offsetWidth;
-                        // Lấy giá trị số của phần trăm (ví dụ: 90 từ "90%")
-                        const percentageValue = parseFloat(progress);
+                                // Tính toán chiều rộng của thanh skill-bar container (cha của bar)
+                                const skillBarContainerWidth = bar.parentElement.offsetWidth;
+                                // Lấy giá trị số của phần trăm (ví dụ: 90 từ "90%")
+                                const percentageValue = parseFloat(progress);
 
-                        // Tính toán vị trí cuối cùng mà thanh level sẽ đạt được
-                        const targetWidthOfBar = (skillBarContainerWidth * percentageValue / 100);
+                                // Tính toán vị trí cuối cùng mà thanh level sẽ đạt được
+                                const targetWidthOfBar = (skillBarContainerWidth * percentageValue / 100);
 
-                        // Di chuyển thẻ phần trăm tới vị trí cuối cùng của thanh level
-                        // và lùi lại một chút bằng chính chiều rộng của nó để căn chỉnh text ở cuối
-                        const finalTranslateX = targetWidthOfBar - percentageDisplay.offsetWidth + 17;
+                                // Di chuyển thẻ phần trăm tới vị trí cuối cùng của thanh level
+                                // và lùi lại một chút bằng chính chiều rộng của nó để căn chỉnh text ở cuối
+                                const finalTranslateX = targetWidthOfBar - percentageDisplay.offsetWidth + 17;
 
-                        percentageDisplay.style.transform = `translateX(${finalTranslateX}px)`; // Dịch chuyển ngang
-                        percentageDisplay.style.opacity = 1; // Làm cho nó hiển thị
+                                percentageDisplay.style.transform = `translateX(${finalTranslateX}px)`; // Dịch chuyển ngang
+                                percentageDisplay.style.opacity = 1; // Làm cho nó hiển thị
+                            }
+                        });
+                        skillsAnimated = true;
+                        observer.unobserve(entry.target);
                     }
                 });
-                skillsAnimated = true;
-                observer.unobserve(entry.target);
+            }, skillObserverOptions);
+            if (skillsSection) {
+                skillObserver.observe(skillsSection);
             }
-        });
-    }, skillObserverOptions);
-
-    if (skillsSection) {
-        skillObserver.observe(skillsSection);
-    }
         });
 
         // Animation khi scroll đến các section
@@ -202,11 +199,4 @@
             section.style.transform = 'translateY(30px)';
             section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(section);
-        });
-
-        // Form submission handling
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Cảm ơn bạn đã gửi tin nhắn! Tôi sẽ phản hồi sớm nhất có thể.');
-            this.reset();
         });
